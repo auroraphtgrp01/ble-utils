@@ -123,14 +123,22 @@ function unpackHealthData(bArr, i2) {
             const heartData = [];
             let index6 = 0;
             while (index6 + 6 <= bArr.length) {
-                const startTimeSeconds = dv.getUint32(index6, true);
-                const startTime = (startTimeSeconds + 946684800) * 1000 - offset;
-                index6 += 4;
-                const heartValue = bArr[index6];
-                index6 += 2; // 1 byte value + 1 padding
+                const b1 = bArr[index6] & 0xFF;
+                index6++;
+                const b2 = bArr[index6] & 0xFF;
+                index6++;
+                const b3 = bArr[index6] & 0xFF;
+                index6++;
+                const b4 = bArr[index6] & 0xFF;
+                index6++;
+                const timestamp = b1 + (b2 << 8) + (b3 << 16) + (b4 << 24);
+                const startTime = (timestamp + 946684800) * 1000 - offset;
+                index6++; // Bỏ qua 1 byte
+                const heartValue = bArr[index6] & 0xFF;
+                index6++;
                 heartData.push({
                     heartStartTime: startTime,
-                    heartValue: heartValue & 0xFF
+                    heartValue: heartValue
                 });
             }
             result.dataType = 1286; // Health_HistoryHeart
