@@ -137,7 +137,7 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
                 index6++;
 
                 heartData.push({
-                    heartStartTime: startTime,
+                    heartStartTime: decodeTimestamp(startTime),
                     heartValue: heartValue
                 });
             }

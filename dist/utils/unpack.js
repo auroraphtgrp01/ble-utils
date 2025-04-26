@@ -133,15 +133,15 @@ function unpackHealthData(bArr, i2) {
                 index6++;
                 const timestamp = b1 + (b2 << 8) + (b3 << 16) + (b4 << 24);
                 const startTime = (timestamp + 946684800) * 1000 - offset;
-                index6++; // Bỏ qua 1 byte
+                index6++;
                 const heartValue = bArr[index6] & 0xFF;
                 index6++;
                 heartData.push({
-                    heartStartTime: startTime,
+                    heartStartTime: (0, timestamps_1.default)(startTime),
                     heartValue: heartValue
                 });
             }
-            result.dataType = 1286; // Health_HistoryHeart
+            result.dataType = 1286;
             result.data = heartData;
             break;
         case 8: // Blood Pressure History

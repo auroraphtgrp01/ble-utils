@@ -1,6 +1,4 @@
 import { Constants } from "../constants";
-import { SleepData } from "../types/sleep";
-import { getFinalSleepData } from "../utils/getFinalSleepData";
 import hexStringToUint8Array from "../utils/hexStringToUint8Array";
 import { unpackHealthData } from "../utils/unpack";
 
@@ -8,5 +6,15 @@ export const unpackHeartHistoryData = (
     byteArr: any
 ) => {
     const rawData = unpackHealthData(hexStringToUint8Array(byteArr), Constants.DATA_UNPACK_TYPE.heartHistory);
-    return rawData
+
+    if (rawData.data && Array.isArray(rawData.data)) {
+        const heartRateAvg = rawData.data.reduce((sum, item) => sum + item.heartValue, 0) / rawData.data.length;
+
+        return {
+            avgHeartRate: Math.round(heartRateAvg),
+            data: rawData.data
+        };
+    }
+
+    return { data: [], avgHeartRate: 0 };
 }
