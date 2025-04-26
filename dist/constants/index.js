@@ -19,3 +19,11 @@ Constants.DATATYPE = {
     Health_HistoryComprehensiveMeasureData: 47,
     Health_History_Body_Data: 51
 };
+Constants.DATA_SLEEP_TYPE = {
+    awake: 244,
+    deepSleep: 241,
+    lightSleep: 242,
+    naps: 245,
+    rem: 243,
+    unknow: -1,
+};

@@ -1,15 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpackHealthData = unpackHealthData;
-const getSleetType_1 = require("./utils/getSleetType");
-const timestamps_1 = __importDefault(require("./utils/timestamps"));
-function unpackHealthData(bArr, i2) {
+import { getSleetType } from "./getSleetType";
+import decodeTimestamp from "./timestamps";
+
+export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, any> {
     const offset = -new Date().getTimezoneOffset() * 60 * 1000; // Convert minutes to milliseconds, negate to match Java's offset
-    const result = { code: 0 };
+    const result: Record<string, any> = { code: 0 };
     const dv = new DataView(bArr.buffer, bArr.byteOffset, bArr.length);
+
     switch (i2) {
         case 2: // Sport History
             const sportData = [];
@@ -38,6 +34,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1282; // Health_HistorySport
             result.data = sportData;
             break;
+
         case 4: // Sleep History
             const sleepData = [];
             let index4 = 0;
@@ -56,8 +53,8 @@ function unpackHealthData(bArr, i2) {
                 index4 += 2;
                 let lightSleepCount = 0;
                 let rapidEyeMovementTotal = 0;
-                let deepSleepTotal;
-                let lightSleepTotal;
+                let deepSleepTotal: number;
+                let lightSleepTotal: number;
                 if (deepSleepCount === 65535) {
                     rapidEyeMovementTotal = dv.getUint16(index4, true);
                     index4 += 2;
@@ -65,8 +62,7 @@ function unpackHealthData(bArr, i2) {
                     index4 += 2;
                     lightSleepTotal = dv.getUint16(index4, true);
                     index4 += 2;
-                }
-                else {
+                } else {
                     lightSleepCount = dv.getUint16(index4, true);
                     index4 += 2;
                     deepSleepTotal = dv.getUint16(index4, true) * 60;
@@ -75,7 +71,7 @@ function unpackHealthData(bArr, i2) {
                     index4 += 2;
                 }
                 const stages = [];
-                const timestamps = new Set();
+                const timestamps = new Set<string>();
                 while (index4 - startIndex + 8 <= totalLength) {
                     const type = bArr[index4];
                     index4 += 1;
@@ -88,8 +84,8 @@ function unpackHealthData(bArr, i2) {
                     if (!timestamps.has(stageTimeStr)) {
                         stages.push({
                             sleepType: type,
-                            type: (0, getSleetType_1.getSleetType)(type),
-                            sleepStartTime: (0, timestamps_1.default)(stageTime),
+                            type: getSleetType(type),
+                            sleepStartTime: decodeTimestamp(stageTime),
                             sleepLen: duration
                         });
                         timestamps.add(stageTimeStr);
@@ -104,8 +100,8 @@ function unpackHealthData(bArr, i2) {
                     }
                 }
                 sleepData.push({
-                    startTime: (0, timestamps_1.default)(startTime),
-                    endTime: (0, timestamps_1.default)(endTime),
+                    startTime: decodeTimestamp(startTime),
+                    endTime: decodeTimestamp(endTime),
                     deepSleepCount,
                     lightSleepCount,
                     deepSleepTotal,
@@ -119,6 +115,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1284; // Health_HistorySleep
             result.data = sleepData;
             break;
+
         case 6: // Heart History
             const heartData = [];
             let index6 = 0;
@@ -136,6 +133,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1286; // Health_HistoryHeart
             result.data = heartData;
             break;
+
         case 8: // Blood Pressure History
             const bloodData = [];
             let index8 = 0;
@@ -159,6 +157,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1288; // Health_HistoryBlood
             result.data = bloodData;
             break;
+
         case 9: // Comprehensive Measurement
             const compData = [];
             let index9 = 0;
@@ -212,6 +211,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1289; // Health_HistoryAll
             result.data = compData;
             break;
+
         case 26: // Blood Oxygen History
             const oxygenData = [];
             let index26 = 0;
@@ -232,6 +232,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1306; // Health_HistoryBloodOxygen
             result.data = oxygenData;
             break;
+
         case 28: // Temp and Humidity History
             const tempHumidData = [];
             let index28 = 0;
@@ -255,6 +256,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1308; // Health_HistoryTempAndHumidity
             result.data = tempHumidData;
             break;
+
         case 30: // Temperature History
             const tempData = [];
             let index30 = 0;
@@ -275,6 +277,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1310; // Health_HistoryTemp
             result.data = tempData;
             break;
+
         case 32: // Ambient Light History
             const ambientData = [];
             let index32 = 0;
@@ -295,6 +298,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1312; // Health_HistoryAmbientLight
             result.data = ambientData;
             break;
+
         case 41: // Fall History
             const fallData = [];
             let index41 = 0;
@@ -312,6 +316,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1321; // Health_HistoryFall
             result.data = fallData;
             break;
+
         case 43: // Health Monitoring History
             const healthMonData = [];
             let index43 = 0;
@@ -374,6 +379,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1323; // Health_HistoryHealthMonitoring
             result.data = healthMonData;
             break;
+
         case 45: // Sport Mode History
             const sportModeData = [];
             let index45 = 0;
@@ -419,6 +425,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1325; // Health_HistorySportMode
             result.data = sportModeData;
             break;
+
         case 47: // Comprehensive Measure Data History
             const compMeasureData = [];
             let index47 = 0;
@@ -484,6 +491,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1327; // Health_HistoryComprehensiveMeasureData
             result.data = compMeasureData;
             break;
+
         case 49: // Background Reminder Record
             const bgReminderData = [];
             let index49 = 0;
@@ -501,6 +509,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1329; // health_BackgroundReminderRecord
             result.data = bgReminderData;
             break;
+
         case 51: // Body Data History
             const bodyData = [];
             let index51 = 0;
@@ -551,6 +560,7 @@ function unpackHealthData(bArr, i2) {
             result.dataType = 1331; // Health_History_Body_Data
             result.data = bodyData;
             break;
+
         default:
             break;
     }
