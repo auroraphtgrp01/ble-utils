@@ -1,9 +1,9 @@
-import { dataType8, healthType8Hex, hexStringToUint8Array } from "../data/data"
+import { Constants } from "../constants";
+import hexStringToUint8Array from "../utils/hexStringToUint8Array";
 import { unpackHealthData } from "../utils/unpack";
 
 export const unpackBloodPressureData = (byteArr: any) => {
-    const dataType = dataType8
-    const rawData = unpackHealthData(hexStringToUint8Array(byteArr), dataType);
+    const rawData = unpackHealthData(hexStringToUint8Array(byteArr), Constants.DATA_UNPACK_TYPE.bloodPressureHistory);
 
     // Tính giá trị trung bình
     if (rawData.data && Array.isArray(rawData.data) && rawData.data.length > 0) {

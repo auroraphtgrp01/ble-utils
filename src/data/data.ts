@@ -1,17 +1,5 @@
-function hexStringToUint8Array(hex: string): Uint8Array {
-    const cleanHex = hex.replace(/\s/g, '');
-    const bytes = new Uint8Array(cleanHex.length / 2);
-    for (let i = 0; i < cleanHex.length; i += 2) {
-        bytes[i / 2] = parseInt(cleanHex.substr(i, 2), 16);
-    }
-    return bytes;
-}
-
-
-// ================================
-const dataTypeForSleep = 4
-
-const sleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3d 0d
+// =============== 4 =================
+const mockSleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3d 0d
                 f2 7e f1 9e 2f 4c 05 00 f1 cb f6 9e 2f 50 01 00 f3 1c f8 9e
                 2f fb 00 00 f2 18 f9 9e 2f 46 03 00 f3 5f fc 9e 2f 43 00 00
                 f2 a2 fc 9e 2f 94 04 00 f1 36 01 9f 2f 74 00 00 f2 aa 01 9f
@@ -34,33 +22,24 @@ const sleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3
                 f2 1d 4e 9f 2f fe 05 00 f3 1b 54 9f 2f 3d 00 00 f2 58 54 9f
                 2f 70 03 00`;
 
-// =================================
-
-const dataType8 = 8
-
-const healthType8Hex = `96 de 9e 2f 01 6e 48 48 9e ec 9e 2f 01 73 4b 58 ba fa 9e 2f
+// ============  8  ==================
+const mockBloodPressureHex = `96 de 9e 2f 01 6e 48 48 9e ec 9e 2f 01 73 4b 58 ba fa 9e 2f
                         01 6a 47 43 ca 08 9f 2f 01 6a 45 40 e4 16 9f 2f 01 6c 45 3e
                         fa 24 9f 2f 01 71 4b 53 f8 32 9f 2f 01 65 44 35 1a 41 9f 2f
                         01 68 45 3d 22 4f 9f 2f 01 69 46 3e`
 
 
-// =================================
+// =========== 2 ======================
 
-const dataType2 = 2
+const mockSportHex = `80 de 9e 2f 88 e5 9e 2f 7d 00 4f 00 05 00`
 
-const sportType2Hex = `80 de 9e 2f 88 e5 9e 2f 7d 00 4f 00 05 00`
+// ==========  6  ====================
 
-
-// =================================
-
-const heartDataType = 6
 const mockHeartHex = `96 de 9e 2f 00 48 9e ec 9e 2f 00 58 ba fa 9e 2f 00 43 ca 08
                         9f 2f 00 40 e4 16 9f 2f 00 3e fa 24 9f 2f 00 53 f8 32 9f 2f
                         00 35 1a 41 9f 2f 00 3d 22 4f 9f 2f 00 3e`
 
-
-
-// =================================
+// =============  9  =================
 const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 00 0f 00 00 00 10 23
                         9e ec 9e 2f 7d 00 58 73 4b 62 12 25 06 00 0f 00 00 00 bd 8d
                         ba fa 9e 2f 7d 00 43 6a 47 62 0d 2e 04 00 0f 00 00 00 72 31
@@ -72,4 +51,4 @@ const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 
                         22 4f 9f 2f 7d 00 3e 69 46 60 0c 27 02 00 0f 00 00 00 27 5d`
 
 
-export { sleepingDataHex, healthType8Hex, sportType2Hex, dataTypeForSleep, dataType8, dataType2, hexStringToUint8Array, heartDataType, mockHeartHex, mockComprehensiveMeasurementHex };
+export { mockSleepingDataHex, mockBloodPressureHex, mockSportHex, mockHeartHex, mockComprehensiveMeasurementHex };

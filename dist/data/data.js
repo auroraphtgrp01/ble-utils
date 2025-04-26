@@ -1,19 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mockComprehensiveMeasurementHex = exports.mockHeartHex = exports.heartDataType = exports.dataType2 = exports.dataType8 = exports.dataTypeForSleep = exports.sportType2Hex = exports.healthType8Hex = exports.sleepingDataHex = void 0;
-exports.hexStringToUint8Array = hexStringToUint8Array;
-function hexStringToUint8Array(hex) {
-    const cleanHex = hex.replace(/\s/g, '');
-    const bytes = new Uint8Array(cleanHex.length / 2);
-    for (let i = 0; i < cleanHex.length; i += 2) {
-        bytes[i / 2] = parseInt(cleanHex.substr(i, 2), 16);
-    }
-    return bytes;
-}
-// ================================
-const dataTypeForSleep = 4;
-exports.dataTypeForSleep = dataTypeForSleep;
-const sleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3d 0d
+exports.mockComprehensiveMeasurementHex = exports.mockHeartHex = exports.mockSportHex = exports.mockBloodPressureHex = exports.mockSleepingDataHex = void 0;
+// =============== 4 =================
+const mockSleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3d 0d
                 f2 7e f1 9e 2f 4c 05 00 f1 cb f6 9e 2f 50 01 00 f3 1c f8 9e
                 2f fb 00 00 f2 18 f9 9e 2f 46 03 00 f3 5f fc 9e 2f 43 00 00
                 f2 a2 fc 9e 2f 94 04 00 f1 36 01 9f 2f 74 00 00 f2 aa 01 9f
@@ -35,28 +24,22 @@ const sleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3
                 2f cc 00 00 f3 e2 46 9f 2f 68 01 00 f1 4b 48 9f 2f d2 05 00
                 f2 1d 4e 9f 2f fe 05 00 f3 1b 54 9f 2f 3d 00 00 f2 58 54 9f
                 2f 70 03 00`;
-exports.sleepingDataHex = sleepingDataHex;
-// =================================
-const dataType8 = 8;
-exports.dataType8 = dataType8;
-const healthType8Hex = `96 de 9e 2f 01 6e 48 48 9e ec 9e 2f 01 73 4b 58 ba fa 9e 2f
+exports.mockSleepingDataHex = mockSleepingDataHex;
+// ============  8  ==================
+const mockBloodPressureHex = `96 de 9e 2f 01 6e 48 48 9e ec 9e 2f 01 73 4b 58 ba fa 9e 2f
                         01 6a 47 43 ca 08 9f 2f 01 6a 45 40 e4 16 9f 2f 01 6c 45 3e
                         fa 24 9f 2f 01 71 4b 53 f8 32 9f 2f 01 65 44 35 1a 41 9f 2f
                         01 68 45 3d 22 4f 9f 2f 01 69 46 3e`;
-exports.healthType8Hex = healthType8Hex;
-// =================================
-const dataType2 = 2;
-exports.dataType2 = dataType2;
-const sportType2Hex = `80 de 9e 2f 88 e5 9e 2f 7d 00 4f 00 05 00`;
-exports.sportType2Hex = sportType2Hex;
-// =================================
-const heartDataType = 6;
-exports.heartDataType = heartDataType;
+exports.mockBloodPressureHex = mockBloodPressureHex;
+// =========== 2 ======================
+const mockSportHex = `80 de 9e 2f 88 e5 9e 2f 7d 00 4f 00 05 00`;
+exports.mockSportHex = mockSportHex;
+// ==========  6  ====================
 const mockHeartHex = `96 de 9e 2f 00 48 9e ec 9e 2f 00 58 ba fa 9e 2f 00 43 ca 08
                         9f 2f 00 40 e4 16 9f 2f 00 3e fa 24 9f 2f 00 53 f8 32 9f 2f
                         00 35 1a 41 9f 2f 00 3d 22 4f 9f 2f 00 3e`;
 exports.mockHeartHex = mockHeartHex;
-// =================================
+// =============  9  =================
 const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 00 0f 00 00 00 10 23
                         9e ec 9e 2f 7d 00 58 73 4b 62 12 25 06 00 0f 00 00 00 bd 8d
                         ba fa 9e 2f 7d 00 43 6a 47 62 0d 2e 04 00 0f 00 00 00 72 31

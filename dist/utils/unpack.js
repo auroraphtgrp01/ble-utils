@@ -7,7 +7,7 @@ exports.unpackHealthData = unpackHealthData;
 const getSleetType_1 = require("./getSleetType");
 const timestamps_1 = __importDefault(require("./timestamps"));
 function unpackHealthData(bArr, i2) {
-    const offset = -new Date().getTimezoneOffset() * 60 * 1000; // Convert minutes to milliseconds, negate to match Java's offset
+    const offset = -new Date().getTimezoneOffset() * 60 * 1000;
     const result = { code: 0 };
     const dv = new DataView(bArr.buffer, bArr.byteOffset, bArr.length);
     switch (i2) {
@@ -191,7 +191,7 @@ function unpackHealthData(bArr, i2) {
                 const bodyFatFloatValue = bArr[index9] & 0xFF;
                 index9 += 1;
                 const bloodSugarValue = bArr[index9] & 0xFF;
-                index9 += 3; // Align to Java's i10 increment
+                index9 += 3;
                 compData.push({
                     startTime: (0, timestamps_1.default)(startTime),
                     stepValue,
@@ -209,7 +209,7 @@ function unpackHealthData(bArr, i2) {
                     bloodSugarValue
                 });
             }
-            result.dataType = 1289; // Health_HistoryAll
+            result.dataType = 1289;
             result.data = compData;
             break;
         default:

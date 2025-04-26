@@ -2,7 +2,7 @@ import { getSleetType } from "./getSleetType";
 import decodeTimestamp from "./timestamps";
 
 export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, any> {
-    const offset = -new Date().getTimezoneOffset() * 60 * 1000; // Convert minutes to milliseconds, negate to match Java's offset
+    const offset = -new Date().getTimezoneOffset() * 60 * 1000;
     const result: Record<string, any> = { code: 0 };
     const dv = new DataView(bArr.buffer, bArr.byteOffset, bArr.length);
 
@@ -190,7 +190,7 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
                 const bodyFatFloatValue = bArr[index9] & 0xFF;
                 index9 += 1;
                 const bloodSugarValue = bArr[index9] & 0xFF;
-                index9 += 3; // Align to Java's i10 increment
+                index9 += 3;
                 compData.push({
                     startTime: decodeTimestamp(startTime),
                     stepValue,
@@ -208,7 +208,7 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
                     bloodSugarValue
                 });
             }
-            result.dataType = 1289; // Health_HistoryAll
+            result.dataType = 1289;
             result.data = compData;
             break;
 

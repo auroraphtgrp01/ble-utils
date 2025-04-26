@@ -1,7 +1,7 @@
 import { Constants } from "../constants";
-import { dataTypeForSleep, hexStringToUint8Array, sleepingDataHex } from "../data/data";
 import { SleepData } from "../types/sleep";
 import { getFinalSleepData } from "../utils/getFinalSleepData";
+import hexStringToUint8Array from "../utils/hexStringToUint8Array";
 import { unpackHealthData } from "../utils/unpack";
 
 export const unpackSportHistoryData = (
