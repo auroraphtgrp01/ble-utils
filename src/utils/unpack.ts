@@ -148,7 +148,7 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
                 const dbp = bArr[index8];
                 index8 += 2; // 1 byte value + 1 padding
                 bloodData.push({
-                    bloodStartTime: startTime,
+                    bloodStartTime: decodeTimestamp(startTime),
                     bloodSBP: sbp & 0xFF,
                     bloodDBP: dbp & 0xFF,
                     isInflated: isInflated & 0xFF
