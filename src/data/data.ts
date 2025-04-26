@@ -50,4 +50,26 @@ const dataType2 = 2
 
 const sportType2Hex = `80 de 9e 2f 88 e5 9e 2f 7d 00 4f 00 05 00`
 
-export { sleepingDataHex, healthType8Hex,sportType2Hex, dataTypeForSleep, dataType8,dataType2, hexStringToUint8Array };
+
+// =================================
+
+const heartDataType = 6
+const mockHeartHex = `96 de 9e 2f 00 48 9e ec 9e 2f 00 58 ba fa 9e 2f 00 43 ca 08
+                        9f 2f 00 40 e4 16 9f 2f 00 3e fa 24 9f 2f 00 53 f8 32 9f 2f
+                        00 35 1a 41 9f 2f 00 3d 22 4f 9f 2f 00 3e`
+
+
+
+// =================================
+const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 00 0f 00 00 00 10 23
+                        9e ec 9e 2f 7d 00 58 73 4b 62 12 25 06 00 0f 00 00 00 bd 8d
+                        ba fa 9e 2f 7d 00 43 6a 47 62 0d 2e 04 00 0f 00 00 00 72 31
+                        ca 08 9f 2f 7d 00 40 6a 45 61 0d 28 02 00 0f 00 00 00 b7 34
+                        e4 16 9f 2f 7d 00 3e 6c 45 60 0c 25 04 00 0f 00 00 00 77 65
+                        fa 24 9f 2f 7d 00 53 71 4b 62 11 28 05 00 0f 00 00 00 79 86
+                        f8 32 9f 2f 7d 00 35 65 44 5c 0b 2d 04 00 0f 00 00 00 d8 f7
+                        1a 41 9f 2f 7d 00 3d 68 45 60 0c 25 02 00 0f 00 00 00 ce 42
+                        22 4f 9f 2f 7d 00 3e 69 46 60 0c 27 02 00 0f 00 00 00 27 5d`
+
+
+export { sleepingDataHex, healthType8Hex, sportType2Hex, dataTypeForSleep, dataType8, dataType2, hexStringToUint8Array, heartDataType, mockHeartHex, mockComprehensiveMeasurementHex };

@@ -27,3 +27,10 @@ Constants.DATA_SLEEP_TYPE = {
     rem: 243,
     unknow: -1,
 };
+Constants.DATA_UNPACK_TYPE = {
+    sportHistory: 2,
+    sleepHistory: 4,
+    heartHistory: 6,
+    bloodPressureHistory: 8,
+    comprehensiveMeasurement: 9
+};
