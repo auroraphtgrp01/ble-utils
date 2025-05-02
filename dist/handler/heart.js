@@ -9,7 +9,6 @@ const hexStringToUint8Array_1 = __importDefault(require("../utils/hexStringToUin
 const unpack_1 = require("../utils/unpack");
 const unpackHeartHistoryData = (byteArr) => {
     const rawData = (0, unpack_1.unpackHealthData)((0, hexStringToUint8Array_1.default)(byteArr), constants_1.Constants.DATA_UNPACK_TYPE.heartHistory);
-    // Loại bỏ code, dataType và tính trung bình cộng
     if (rawData.data && Array.isArray(rawData.data)) {
         const heartRateAvg = rawData.data.reduce((sum, item) => sum + item.heartValue, 0) / rawData.data.length;
         return {

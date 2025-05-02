@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mockComprehensiveMeasurementHex = exports.mockHeartHex = exports.mockSportHex = exports.mockBloodPressureHex = exports.mockSleepingDataHex = void 0;
+exports.mockDeviceInfoHex = exports.mockComprehensiveMeasurementHex = exports.mockHeartHex = exports.mockSportHex = exports.mockBloodPressureHex = exports.mockSleepingDataHex = void 0;
 // =============== 4 =================
 const mockSleepingDataHex = `af fa 54 00 7e f1 9e 2f c1 01 9f 2f ff ff 3e 01 c4 01 3d 0d
                 f2 7e f1 9e 2f 4c 05 00 f1 cb f6 9e 2f 50 01 00 f3 1c f8 9e
@@ -50,3 +50,6 @@ const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 
                         1a 41 9f 2f 7d 00 3d 68 45 60 0c 25 02 00 0f 00 00 00 ce 42
                         22 4f 9f 2f 7d 00 3e 69 46 60 0c 27 02 00 0f 00 00 00 27 5d`;
 exports.mockComprehensiveMeasurementHex = mockComprehensiveMeasurementHex;
+// =============  10  =================
+const mockDeviceInfoHex = `02 00 1e 00 a3 00 0e 02 00 2a 00 01 00 03 00 00 00 00 00 00 00 00 01 00 00 00 00 00 7f e0`;
+exports.mockDeviceInfoHex = mockDeviceInfoHex;

@@ -51,4 +51,10 @@ const mockComprehensiveMeasurementHex = `96 de 9e 2f 00 00 48 6e 48 62 0e 2d 02 
                         22 4f 9f 2f 7d 00 3e 69 46 60 0c 27 02 00 0f 00 00 00 27 5d`
 
 
-export { mockSleepingDataHex, mockBloodPressureHex, mockSportHex, mockHeartHex, mockComprehensiveMeasurementHex };
+
+// =============  10  =================
+const mockDeviceInfoHex = `02 00 1e 00 a3 00 0e 02 00 2a 00 01 00 03 00 00 00 00 00 00 00 00 01 00 00 00 00 00 7f e0`
+
+export { mockSleepingDataHex, mockBloodPressureHex, mockSportHex, mockHeartHex, mockComprehensiveMeasurementHex, mockDeviceInfoHex };
+
+

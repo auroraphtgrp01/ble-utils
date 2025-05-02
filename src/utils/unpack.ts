@@ -141,7 +141,7 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
                     heartValue: heartValue
                 });
             }
-            result.dataType = 1286; 
+            result.dataType = 1286;
             result.data = heartData;
             break;
 
@@ -226,5 +226,51 @@ export function unpackHealthData(bArr: Uint8Array, i2: number): Record<string, a
         default:
             break;
     }
+    return result;
+}
+
+export function unpackDeviceInfoData(bArr: Uint8Array): { [key: string]: any } {
+    const result: { [key: string]: any } = {};
+    result["code"] = 0;
+
+    // Header là 4 byte, payload bắt đầu từ byte thứ 4
+    const payloadStart = 4;
+    // Loại bỏ 2 byte CRC cuối
+    const payload = bArr.slice(payloadStart, bArr.length - 2);
+
+    if (payload.length < 8) {
+        console.error("Payload quá ngắn để trích xuất dữ liệu");
+        return result;
+    }
+
+    // Trích xuất thông tin từ payload
+    const deviceId = (payload[0] & 0xFF) + ((payload[1] & 0xFF) << 8);
+    const subVersion = payload[2] & 0xFF;
+    const mainVersion = payload[3] & 0xFF;
+    const batteryState = payload[4] & 0xFF;
+    const batteryValue = payload[5] & 0xFF;
+    const bindState = payload[6] & 0xFF;
+    const syncState = payload[7] & 0xFF;
+
+    // Tính toán deviceVersion
+    const deviceVersion = subVersion < 10
+        ? `${mainVersion}.0${subVersion}`
+        : `${mainVersion}.${subVersion}`;
+
+    // Tạo object chứa dữ liệu
+    const data: { [key: string]: any } = {
+        deviceId,
+        deviceVersion,
+        deviceBatteryState: batteryState,
+        deviceBatteryValue: batteryValue,
+        deviceMainVersion: mainVersion,
+        deviceSubVersion: subVersion,
+        devicetBindState: bindState,
+        devicetSyncState: syncState,
+    };
+
+    result["dataType"] = 512;
+    result["data"] = data;
+
     return result;
 }

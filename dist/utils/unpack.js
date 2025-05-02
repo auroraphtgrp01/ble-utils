@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpackHealthData = unpackHealthData;
+exports.unpackDeviceInfoData = unpackDeviceInfoData;
 const getSleetType_1 = require("./getSleetType");
 const timestamps_1 = __importDefault(require("./timestamps"));
 function unpackHealthData(bArr, i2) {
@@ -223,5 +224,43 @@ function unpackHealthData(bArr, i2) {
         default:
             break;
     }
+    return result;
+}
+function unpackDeviceInfoData(bArr) {
+    const result = {};
+    result["code"] = 0;
+    // Header là 4 byte, payload bắt đầu từ byte thứ 4
+    const payloadStart = 4;
+    // Loại bỏ 2 byte CRC cuối
+    const payload = bArr.slice(payloadStart, bArr.length - 2);
+    if (payload.length < 8) {
+        console.error("Payload quá ngắn để trích xuất dữ liệu");
+        return result;
+    }
+    // Trích xuất thông tin từ payload
+    const deviceId = (payload[0] & 0xFF) + ((payload[1] & 0xFF) << 8);
+    const subVersion = payload[2] & 0xFF;
+    const mainVersion = payload[3] & 0xFF;
+    const batteryState = payload[4] & 0xFF;
+    const batteryValue = payload[5] & 0xFF;
+    const bindState = payload[6] & 0xFF;
+    const syncState = payload[7] & 0xFF;
+    // Tính toán deviceVersion
+    const deviceVersion = subVersion < 10
+        ? `${mainVersion}.0${subVersion}`
+        : `${mainVersion}.${subVersion}`;
+    // Tạo object chứa dữ liệu
+    const data = {
+        deviceId,
+        deviceVersion,
+        deviceBatteryState: batteryState,
+        deviceBatteryValue: batteryValue,
+        deviceMainVersion: mainVersion,
+        deviceSubVersion: subVersion,
+        devicetBindState: bindState,
+        devicetSyncState: syncState,
+    };
+    result["dataType"] = 512;
+    result["data"] = data;
     return result;
 }
